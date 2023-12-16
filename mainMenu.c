@@ -139,6 +139,4 @@ player get_player_data()
     player.name = name;
     player.score = 0;
     return player;
-
 }
-
