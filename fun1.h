@@ -27,7 +27,7 @@ void printGrid(int r, int c, char grid[r][c]){
 }
 
 //check if a player completed a box function)
-int checkBox(int i,int r1,int r2,int c1,int c2,int n,int m,char a[][],int round){
+/*int checkBox(int i,int r1,int r2,int c1,int c2,int n,int m,char a[][],int round){
         if (c1==c2){
             if(r1<r2){
                 if(i==1){a[r1+1][c1]='1';}
@@ -65,4 +65,4 @@ int checkBox(int i,int r1,int r2,int c1,int c2,int n,int m,char a[][],int round)
             }
         }
     }
-   return flag; }
+   return flag; }*/

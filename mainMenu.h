@@ -8,19 +8,21 @@ settings newGameMenu();
 
 void printlogo()
 {
-    printf(" ___                    _____       ___           _\n");         
-    printf("(  _`\\                 (  _  )     (  _`\\        ( )_       \n");  
-    printf("| (_) )   _            `\\  ,/'     | | ) |   _   | ,_)  ___ \n"); 
-    printf("|  _ <' /'_`\\ (`\\/')    /'_`\\/\\    | | | ) /'_`\\ | |  /',__)\n");
-    printf("| (_) )( (_) ) >  <    | (_> ,<`   | |_) |( (_) )| |_ \\__, \\\n");
-    printf("(____/'`\\___/'(_/\\_)   `\\___/\\/'   (____/'`\\___/'`\\__)(____/\n") ;
-    printf("                                                 by ziad & logy\n\n");
+printf(" ___           _             _____       ___   \n");                          
+printf("(  _`\\        ( )_          (  _  )     (  _`\\   \n");                         
+printf("| | ) |   _   | ,_)  ___    `\\  ,/'     | (_) )   _            __    ___ \n"); 
+printf("| | | ) /'_`\\ | |  /',__)    /'_`\\/\\    |  _ <' /'_`\\ (`\\/') /'__`\\/',__)\n"); 
+printf("| |_) |( (_) )| |_ \\__, \\   | (_> ,<`   | (_) )( (_) ) >  < (  ___/\\__, \\\n"); 
+printf("(____/'`\\___/'`\\__)(____/   `\\___/\\/'   (____/'`\\___/'(_/\\_)`\\____)(____/\n"); 
+                                                                         
+printf("                                                               by ziad & logy\n\n");
                                                             
 
 }
 
-settings *mainmenu(settings *settings)  //this function retuns a pointer to the game settings
+settings mainmenu(settings settings)  //this function retuns a pointer to the game settings
 {
+    
     system("cls");
     int check = 1;
     int command;
@@ -44,7 +46,7 @@ settings *mainmenu(settings *settings)  //this function retuns a pointer to the 
     }
     if (command == 1)
     {
-        *settings = newGameMenu();
+        settings = newGameMenu();
         //add a function to open the interface
         
     }
@@ -74,8 +76,9 @@ settings *mainmenu(settings *settings)  //this function retuns a pointer to the 
             printf("%s",str);
             line++;
 
-        }
+        }      
     }
+    return settings;
 }
 
 
@@ -141,5 +144,4 @@ player get_player_data()
     player.name = name;
     player.score = 0;
     return player;
-
 }
