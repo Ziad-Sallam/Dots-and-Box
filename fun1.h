@@ -20,9 +20,42 @@ int validate(int r1,int r2,int c1,int c2){
 void printGrid(int r, int c, char grid[r][c]){
     for (int i=0; i<r; i++){
         for (int j=0; j<c; j++){
-            printf("%c", grid[i][j]);
+            if (i%2 == 0) {
+                if (grid[i][j] == '.'){
+                    printf("%c",grid[i][j]);
+                }
+                else{
+                    for(int x = 0; x <9;x++)
+                    {
+                        printf("%c",grid[i][j]);
+                    }
+                }
+                
+            }
         }
+            if (i%2 == 1)
+            {
+                for(int nr = 0; nr<4;nr++){
+                    for(int x = 0; x < c;x++)
+                    {
+                        printf("%c",grid[i][x]);
+                        printf("    ");
+                    }
+                    if(nr < 3)
+                    {
+                    printf("\n");
+                    }
+                }
+                
+                    
+                
+                
+            }
+            
+           
+        
         printf("\n");
+        
     }
 }
 
