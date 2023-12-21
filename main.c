@@ -5,13 +5,13 @@
 #include "score.h"
 
 
-#define RED "\033 [31m"
-#define GREEN "\033 [32m"
-#define YELLOW "\033 [33m"
-#define BLUE "\033 [34m"
-#define MAGENTA "\033 [35m"
-#define CYAN "\033 [36m"
-#define RESET "\033 [0m"
+#define RED "\033[31m"
+#define GREEN "\033[32m"
+#define YELLOW "\033[33m"
+#define BLUE "\033[34m"
+#define MAGENTA "\033[35m"
+#define CYAN "\033[36m"
+#define RESET "\033[0m"
 
 int main(){
 
@@ -19,7 +19,10 @@ int main(){
 
     main_menu = mainmenu();
 
-    int r, c,s;
+    int r, c,s,turn = 1;
+    main_menu.player1.score = 0;
+    main_menu.player2.score = 0;
+
     if(main_menu.diff ==1) {r=5; c=5;s=2;}
     else if(main_menu.diff ==2) {r=11; c=11;s=5;}
     int arr[s][s] = {};
@@ -42,7 +45,7 @@ int main(){
     {
 
         
-        //system("cls");
+        system("cls");
         for(int i =0;i<s;i++)
             {
                 for(int j = 0;j<s;j++)
@@ -52,7 +55,7 @@ int main(){
                 printf("\n");
             }
         printlogo();
-        printGrid(r, c, grid);
+        printGrid(r, c, grid,turn);
         
         printf("Make a move!\n");
         
@@ -98,24 +101,29 @@ int main(){
             r1 = r1 ^ r2;
         }
          
-        if (validate(r1, r2, c1, c2) == 1){
+        if (turn == 1){
             if (r1 == r2 && grid[r1][c1 +1] != '_'){
                 grid[r1][c1 +1] = '_';
                 printf("changed\n");
-                line_contribution(s,arr,r1,r2,c1,c2);
+                main_menu.player1.score+= line_contribution(s,arr,r1,r2,c1,c2);
+                
             }
             else if (c1 == c2 && grid[r1+1][c1] != '|'){
                 grid[r1+1][c1] = '|';
                 printf("changed\n");
-                line_contribution(s,arr,r1,r2,c1,c2);
+                main_menu.player1.score+= line_contribution(s,arr,r1,r2,c1,c2);
+                
             }
             else{
                 printf("Invalid move!!\n");
             }
+
+            
+            printf(CYAN"the score of player one: %i"RESET"\n",main_menu.player1.score);
             
             
         }
 
     }
-    printGrid(r, c, grid);
+    printGrid(r, c, grid,turn);
 }

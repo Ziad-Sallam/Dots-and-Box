@@ -4,6 +4,14 @@
 #include <math.h>
 #include <string.h>
 
+#define RED "\033[31m"
+#define GREEN "\033[32m"
+#define YELLOW "\033[33m"
+#define BLUE "\033[34m"
+#define MAGENTA "\033[35m"
+#define CYAN "\033[36m"
+#define RESET "\033[0m"
+
 
 //function to check if the input is valid
 int validate(int r1,int r2,int c1,int c2){
@@ -17,17 +25,17 @@ int validate(int r1,int r2,int c1,int c2){
 
 //function to get index of the line
 //function call if valid=1
-void printGrid(int r, int c, char grid[r][c]){
+void printGrid(int r, int c, char grid[r][c],int turn){
     for (int i=0; i<r; i++){
         for (int j=0; j<c; j++){
             if (i%2 == 0) {
                 if (grid[i][j] == '.'){
-                    printf("%c",grid[i][j]);
+                    printf(YELLOW"%c"RESET,grid[i][j]);
                 }
                 else{
                     for(int x = 0; x <9;x++)
                     {
-                        printf("%c",grid[i][j]);
+                        if(turn == 1 ){printf(CYAN"%c"RESET,grid[i][j]);}
                     }
                 }
                 
@@ -38,21 +46,16 @@ void printGrid(int r, int c, char grid[r][c]){
                 for(int nr = 0; nr<4;nr++){
                     for(int x = 0; x < c;x++)
                     {
-                        printf("%c",grid[i][x]);
+                        if(turn==1){printf(CYAN"%c"RESET,grid[i][x]);}
                         printf("    ");
                     }
                     if(nr < 3)
                     {
                     printf("\n");
                     }
-                }
+                }          
                 
-                    
-                
-                
-            }
-            
-           
+            } 
         
         printf("\n");
         

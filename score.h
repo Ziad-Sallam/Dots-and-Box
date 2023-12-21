@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void line_contribution(int s,int arr[s][s],int r1,int r2,int c1,int c2)
+int line_contribution(int s,int arr[s][s],int r1,int r2,int c1,int c2)
 {
+    int x = 0;
     r1 = (r1+2)/2;r2 = (r2+2)/2;c1 = (c1+2)/2;c2 = (c2+2)/2;
 
     if(r1==r2)
@@ -10,21 +11,27 @@ void line_contribution(int s,int arr[s][s],int r1,int r2,int c1,int c2)
         if (r1-2>-1)
         {
             arr[r1-2][c1-1] += 1;
+            if (arr[r1-2][c1-1] == 4){x+=1;}
         }
         if (r1-1 < s)
         {
             arr[r1-1][c1-1] += 1;
+            if(arr[r1-1][c1-1] == 4){x+=1;}
+            
         }
     }
     else{
         if (c1-2>-1)
         {
             arr[r1-1][c1-2] += 1;
+            if(arr[r1-1][c1-2] == 4){x+=1;}
         }
         if(c1-1 < s){
             arr[r1-1][c1-1] += 1;
+            if(arr[r1-1][c1-1]== 4){x+=1;}
         }
     }
+    return x;
 }
 
 
