@@ -5,6 +5,14 @@
 #include "score.h"
 
 
+#define RED "\033 [31m"
+#define GREEN "\033 [32m"
+#define YELLOW "\033 [33m"
+#define BLUE "\033 [34m"
+#define MAGENTA "\033 [35m"
+#define CYAN "\033 [36m"
+#define RESET "\033 [0m"
+
 int main(){
 
     settings main_menu;
@@ -25,17 +33,16 @@ int main(){
             grid[i][j+1]= ' ';
             
         }
-
     }
 
-    
+    char r1c, r2c, c1c, c2c,ch;
+    int r1 =0,r2=0,c1=0,c2=0;
 
-    while(1)
+    while(endgame(s,arr))
     {
-        char r1c, r2c, c1c, c2c,ch;
-        int r1 =0,r2=0,c1=0,c2=0;
+
         
-        system("cls");
+        //system("cls");
         for(int i =0;i<s;i++)
             {
                 for(int j = 0;j<s;j++)
@@ -110,4 +117,5 @@ int main(){
         }
 
     }
+    printGrid(r, c, grid);
 }

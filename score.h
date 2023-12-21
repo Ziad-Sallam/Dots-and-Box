@@ -19,10 +19,23 @@ void line_contribution(int s,int arr[s][s],int r1,int r2,int c1,int c2)
     else{
         if (c1-2>-1)
         {
-            arr[r1-1][c1-1] += 1;
-        }
-        if(c1-1 <s){
             arr[r1-1][c1-2] += 1;
         }
+        if(c1-1 < s){
+            arr[r1-1][c1-1] += 1;
+        }
     }
+}
+
+
+int endgame(int s,int arr[s][s])
+{
+    for (int i = 0;i<s;i++)
+    {
+        for(int j = 0;j<s;j++)
+        {
+            if (arr[i][j] != 4){return 1;}
+        }
+    }
+    return 0;
 }

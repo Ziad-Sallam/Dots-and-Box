@@ -1,7 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "mainMenu.h"
-#include "fun1.h"
 
 void line_contribution(int s,int arr[s][s],int r1,int r2,int c1,int c2)
 {
@@ -11,22 +9,35 @@ void line_contribution(int s,int arr[s][s],int r1,int r2,int c1,int c2)
     {
         if (r1-2>-1)
         {
-            arr[c1-1][r1-2] += 1;
+            arr[r1-2][c1-1] += 1;
         }
         if (r1-1 < s)
         {
-            arr[c1-1][r1-1] += 1;
+            arr[r1-1][c1-1] += 1;
         }
     }
     else{
         if (c1-2>-1)
         {
-            arr[c1-1][r1-1] += 1;
+            arr[r1-1][c1-2] += 1;
         }
-        else{
-            arr[c1-2][r1-1] += 1;
+        if(c1-1 < s){
+            arr[r1-1][c1-1] += 1;
         }
     }
+}
+
+
+int endgame(int s,int arr[s][s])
+{
+    for (int i = 0;i<s;i++)
+    {
+        for(int j = 0;j<s;j++)
+        {
+            if (arr[i][j] != 4){return 1;}
+        }
+    }
+    return 0;
 }
 
 
