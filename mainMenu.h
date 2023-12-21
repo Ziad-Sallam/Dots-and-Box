@@ -20,8 +20,9 @@ printf("                                                               by ziad &
 
 }
 
-settings mainmenu(settings settings)  //this function retuns a pointer to the game settings
+settings mainmenu()  //this function retuns a pointer to the game settings
 {
+    settings settings;
     
     system("cls");
     int check = 1;
