@@ -20,12 +20,16 @@ int validate(int r1,int r2,int c1,int c2){
             valid = 1;
     else if (c1==c2&&(abs(r1-r2)==2))
                 valid = 1;
+        
     return valid;
  }
 
 //function to get index of the line
 //function call if valid=1
-void printGrid(int r, int c, char grid[r][c],int turn){
+void printGrid(int r, int c, char grid[r][c],int l,int moves[l],int p){
+    
+    int turn = 2;
+    
     for (int i=0; i<r; i++){
         for (int j=0; j<c; j++){
             if (i%2 == 0) {
@@ -33,9 +37,18 @@ void printGrid(int r, int c, char grid[r][c],int turn){
                     printf(YELLOW"%c"RESET,grid[i][j]);
                 }
                 else{
+                    
                     for(int x = 0; x <9;x++)
                     {
-                        if(turn == 1 ){printf(CYAN"%c"RESET,grid[i][j]);}
+                        for(int l = 0;l<p;l++)
+                        {
+                            if (moves[l]%10 == 1 && ((moves[l])/10)%10 == j && (moves[l]/100) ==i){turn = 1;break;}
+                            else if(moves[l]%10 == 2&& ((moves[l])/10)%10 == j && (moves[l]/100) ==i){turn = 2;break;}
+                        }
+                        
+                        if(turn==1){printf(CYAN"%c"RESET,grid[i][j]);}
+                        else{printf(MAGENTA"%C"RESET,grid[i][j]);}
+                        
                     }
                 }
                 
@@ -43,10 +56,18 @@ void printGrid(int r, int c, char grid[r][c],int turn){
         }
             if (i%2 == 1)
             {
+                
                 for(int nr = 0; nr<4;nr++){
+                    
                     for(int x = 0; x < c;x++)
                     {
+                        for(int l = 0;l<p;l++)
+                    {
+                        if (moves[l] %10 == 1 && ((moves[l])/10)%10 == x && (moves[l]/100) ==i){turn =1;break;}
+                        else if(moves[l]%10 == 2 && ((moves[l])/10)%10 == x && (moves[l]/100) ==i){turn = 2;break;}
+                    }
                         if(turn==1){printf(CYAN"%c"RESET,grid[i][x]);}
+                        else{printf(MAGENTA"%C"RESET,grid[i][x]);}
                         printf("    ");
                     }
                     if(nr < 3)
