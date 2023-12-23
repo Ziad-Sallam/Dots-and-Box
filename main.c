@@ -202,12 +202,22 @@ int main(){
                 
             
         }
-        if(turn==2 && main_menu.mode==1)
+        while(turn==2 && main_menu.mode==1)
         {
-            
-            moves[point] = comp_move(r,c,grid,s,arr)*10+2;
+            int a= comp_move(r,c,grid,s,arr)*10+2;
+            int ch = comp_line_cont(a/100,(a/10)%10,s,arr);
+            main_menu.player2.score+=ch;            
+            moves[point] = a; 
             point+=1;
-            turn = 1;
+            
+            for (int i = 0;i<s;i++)
+                {
+                    for(int j = 0;j<s;j++)
+                    {
+                        if (arr[i][j] == 4){grid[2*i+1][2*j+1]= turn+48;}
+                    }
+                }
+                if (ch == 0){turn = 1;};
             
         }
         
