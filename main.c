@@ -131,7 +131,7 @@ int main(){
                 {
                     for(int j = 0;j<s;j++)
                     {
-                        if (arr[i][j] == 4 && grid[2*i+1][2*i+1] == ' '){grid[2*i+1][2*j+1] = turn+48;}
+                        if (arr[i][j] == 4 && grid[2*i+1][2*j+1] == ' '){grid[2*i+1][2*j+1] = turn+48;}
                     }
                 }
                 if (ch == 0){turn = 2;};
@@ -148,7 +148,7 @@ int main(){
                 {
                     for(int j = 0;j<s;j++)
                     {
-                        if (arr[i][j] == 4 && grid[2*i+1][2*i+1] == ' '){grid[2*i+1][2*j+1] = turn+48;}
+                        if (arr[i][j] == 4 && grid[2*i+1][2*j+1] == ' '){grid[2*i+1][2*j+1] = turn+48;}
                     }
                 }
                 if (ch == 0){turn = 2;};
@@ -172,7 +172,7 @@ int main(){
                 {
                     for(int j = 0;j<s;j++)
                     {
-                        if (arr[i][j] == 4 && grid[2*i+1][2*i+1] == ' '){grid[2*i+1][2*j+1] = turn+48;}
+                        if (arr[i][j] == 4 && grid[2*i+1][2*j+1] == ' '){grid[2*i+1][2*j+1] = turn+48;}
                     }
                 }
                 if (ch == 0){turn = 1;};
@@ -189,7 +189,7 @@ int main(){
                 {
                     for(int j = 0;j<s;j++)
                     {
-                        if (arr[i][j] == 4){grid[2*i+1][2*j+1]= turn+48;}
+                        if (arr[i][j] == 4&& grid[2*i+1][2*j+1] == ' '){grid[2*i+1][2*j+1]= turn+48;}
                     }
                 }
                 if (ch == 0){turn = 1;};
@@ -214,7 +214,7 @@ int main(){
                 {
                     for(int j = 0;j<s;j++)
                     {
-                        if (arr[i][j] == 4){grid[2*i+1][2*j+1]= turn+48;}
+                        if (arr[i][j] == 4&& grid[2*i+1][2*j+1] == ' '){grid[2*i+1][2*j+1]= turn+48;}
                     }
                 }
                 if (ch == 0){turn = 1;};
@@ -225,6 +225,8 @@ int main(){
         fflush(stdin);
 
     }
+    system("cls");
+    printlogo();
     printGrid(r, c, grid,l,moves,point+1);
 
     printf(CYAN"the score of player %s: %i"RESET"\t ",main_menu.player1.name,main_menu.player1.score);
