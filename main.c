@@ -5,6 +5,7 @@
 #include "fun1.h"
 #include "score.h"
 #include <windows.h>
+#include "computer.h"
 
 
 #define RED "\033[31m"
@@ -159,7 +160,7 @@ int main(){
                           
             
         }
-        if (turn == 2){
+        if (turn == 2 && main_menu.mode==2){
             if (r1 == r2 && grid[r1][c1 +1] != '_'){
                 grid[r1][c1 +1] = '_';
                 printf("move made!\n");
@@ -201,6 +202,14 @@ int main(){
                 
             
         }
+        if(turn==2 && main_menu.mode==1)
+        {
+            
+            moves[point] = comp_move(r,c,grid,s,arr)*10+2;
+            point+=1;
+            turn = 1;
+            
+        }
         
     
         fflush(stdin);
@@ -219,5 +228,5 @@ int main(){
     {
         printf("Player Two Won !!");
     }
-    else{printf("Draw !!");}
+    else{printf("Draw");}
 }
