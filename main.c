@@ -4,6 +4,7 @@
 #include "mainMenu.h"
 #include "fun1.h"
 #include "score.h"
+#include <windows.h>
 
 
 #define RED "\033[31m"
@@ -20,7 +21,7 @@ int main(){
 
     main_menu = mainmenu();
 
-    int r, c,s,l,turn = 1;
+    int r, c,s,l,turn = 1,ch;
     main_menu.player1.score = 0;
     main_menu.player2.score = 0;
     int point = 0;
@@ -48,9 +49,11 @@ int main(){
 
     while(endgame(s,arr))
     {
+        
 
         
         system("cls");
+        
         for(int i =0;i<s;i++)
             {
                 for(int j = 0;j<s;j++)
@@ -61,8 +64,10 @@ int main(){
             }
         printlogo();
         printGrid(r, c, grid,l,moves,point+1);
-        printf(MAGENTA"the score of player two: %i"RESET"\n",main_menu.player2.score);
-        printf(CYAN"the score of player one: %i"RESET"\n",main_menu.player1.score);
+        printf("player %i Turn\n", turn);
+        printf(CYAN"the score of player %s: %i"RESET"\t ",main_menu.player1.name,main_menu.player1.score);
+        printf(MAGENTA"the score of player %s: %i"RESET"\n",main_menu.player2.name,main_menu.player2.score);
+        
         
         printf("Make a move!\n");
         
@@ -113,13 +118,22 @@ int main(){
             r1 = r1 ^ r2;
         }
          
-        if (turn%2 == 1){
+        if (turn == 1){
             if (r1 == r2 && grid[r1][c1 +1] != '_'){
                 grid[r1][c1 +1] = '_';
                 printf("move made!\n");
                 moves[point] = r1*100+(c1+1)*10+1;
                 point+=1;
-                main_menu.player1.score+= line_contribution(s,arr,r1,r2,c1,c2);
+                ch = line_contribution(s,arr,r1,r2,c1,c2);
+                main_menu.player1.score+= ch ;
+                for (int i = 0;i<s;i++)
+                {
+                    for(int j = 0;j<s;j++)
+                    {
+                        if (arr[i][j] == 4 && grid[2*i+1][2*i+1] == ' '){grid[2*i+1][2*j+1] = turn+48;}
+                    }
+                }
+                if (ch == 0){turn = 2;};
                 
             }
             else if (c1 == c2 && grid[r1+1][c1] != '|'){
@@ -127,7 +141,16 @@ int main(){
                 printf("move made!\n");
                 moves[point] = (r1+1)*100+(c1)*10+1;
                 point+=1;
-                main_menu.player1.score+= line_contribution(s,arr,r1,r2,c1,c2);
+                ch = line_contribution(s,arr,r1,r2,c1,c2);
+                main_menu.player1.score+= ch ;
+                for (int i = 0;i<s;i++)
+                {
+                    for(int j = 0;j<s;j++)
+                    {
+                        if (arr[i][j] == 4 && grid[2*i+1][2*i+1] == ' '){grid[2*i+1][2*j+1] = turn+48;}
+                    }
+                }
+                if (ch == 0){turn = 2;};
                 
             }
             else{
@@ -136,13 +159,22 @@ int main(){
                           
             
         }
-        if (turn%2 == 0){
+        if (turn == 2){
             if (r1 == r2 && grid[r1][c1 +1] != '_'){
                 grid[r1][c1 +1] = '_';
                 printf("move made!\n");
                 moves[point] = r1*100+(c1+1)*10+2;
                 point+=1;
-                main_menu.player2.score+= line_contribution(s,arr,r1,r2,c1,c2);
+                ch = line_contribution(s,arr,r1,r2,c1,c2);
+                main_menu.player2.score+= ch ;
+                for (int i = 0;i<s;i++)
+                {
+                    for(int j = 0;j<s;j++)
+                    {
+                        if (arr[i][j] == 4 && grid[2*i+1][2*i+1] == ' '){grid[2*i+1][2*j+1] = turn+48;}
+                    }
+                }
+                if (ch == 0){turn = 1;};
                 
             }
             else if (c1 == c2 && grid[r1+1][c1] != '|'){
@@ -150,7 +182,16 @@ int main(){
                 printf("move made!\n");
                 moves[point] = (r1+1)*100+(c1)*10+2;
                 point+=1;
-                main_menu.player2.score+= line_contribution(s,arr,r1,r2,c1,c2);
+                ch = line_contribution(s,arr,r1,r2,c1,c2);
+                main_menu.player2.score+= ch ;
+                for (int i = 0;i<s;i++)
+                {
+                    for(int j = 0;j<s;j++)
+                    {
+                        if (arr[i][j] == 4){grid[2*i+1][2*j+1]= turn+48;}
+                    }
+                }
+                if (ch == 0){turn = 1;};
                 
             }
             else{
@@ -160,9 +201,23 @@ int main(){
                 
             
         }
-        turn+=1;
+        
+    
         fflush(stdin);
 
     }
     printGrid(r, c, grid,l,moves,point+1);
+
+    printf(CYAN"the score of player %s: %i"RESET"\t ",main_menu.player1.name,main_menu.player1.score);
+    printf(MAGENTA"the score of player %s: %i"RESET"\n",main_menu.player2.name,main_menu.player2.score);
+
+    if (main_menu.player1.score>main_menu.player2.score)
+    {
+        printf("Player One Won !!");
+    }
+    else if (main_menu.player1.score<main_menu.player2.score)
+    {
+        printf("Player Two Won !!");
+    }
+    else{printf("Draw !!");}
 }

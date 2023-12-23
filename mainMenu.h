@@ -108,8 +108,10 @@ settings newGameMenu()
     p1 = get_player_data();
 
     settings.player1=p1;
-    
 
+    settings.player2.name = "Computer";
+    settings.player2.score = 0;
+    
     if (mode == 2)
     {
         printf("Enter the name of player 2: ");

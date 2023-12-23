@@ -28,7 +28,7 @@ int validate(int r1,int r2,int c1,int c2){
 //function call if valid=1
 void printGrid(int r, int c, char grid[r][c],int l,int moves[l],int p){
     
-    int turn = 2;
+    int turn = 0;
     
     for (int i=0; i<r; i++){
         for (int j=0; j<c; j++){
@@ -48,6 +48,7 @@ void printGrid(int r, int c, char grid[r][c],int l,int moves[l],int p){
                         
                         if(turn==1){printf(CYAN"%c"RESET,grid[i][j]);}
                         else{printf(MAGENTA"%C"RESET,grid[i][j]);}
+                        turn = 0;
                         
                     }
                 }
@@ -67,8 +68,11 @@ void printGrid(int r, int c, char grid[r][c],int l,int moves[l],int p){
                         else if(moves[l]%10 == 2 && ((moves[l])/10)%10 == x && (moves[l]/100) ==i){turn = 2;break;}
                     }
                         if(turn==1){printf(CYAN"%c"RESET,grid[i][x]);}
-                        else{printf(MAGENTA"%C"RESET,grid[i][x]);}
+                        else if(turn==2){printf(MAGENTA"%C"RESET,grid[i][x]);}
+                        else if(nr == 1){printf("%C",grid[i][x]);}
+                        else{printf(" ");}
                         printf("    ");
+                        turn = 0;
                     }
                     if(nr < 3)
                     {
