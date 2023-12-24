@@ -86,10 +86,14 @@ settings mainmenu()  //this function retuns a pointer to the game settings
 settings newGameMenu()
 {
     int check = 1,mode,diff;
-
-    player p1,p2;
+    
 
     settings settings;
+
+    settings.player1.name = malloc(30);
+    settings.player2.name = malloc(30);
+
+
     printlogo();
     printf("Select the game mode: \n\n (1) Human Vs Computer \n\n (2) Human vs Human\n\n Choose: ");
     while (check)
@@ -105,20 +109,20 @@ settings newGameMenu()
 
     printf("Enter the name of player 1: ");
 
-    p1 = get_player_data();
+    //settings.player1 = get_player_data();
+    scanf("%s",settings.player1.name);
 
-    settings.player1=p1;
-
-    settings.player2.name = "Computer";
-    settings.player2.score = 0;
+    
+    if (mode ==1){settings.player2.name = "Computer";}
+    
     
     if (mode == 2)
     {
         printf("Enter the name of player 2: ");
         
-        p2 = get_player_data();
+        scanf("%s",settings.player2.name);
 
-        settings.player2=p2;
+        
     }
     system("cls");
     printlogo();
@@ -138,13 +142,3 @@ settings newGameMenu()
 
 }
 
-
-player get_player_data()
-{
-    char name[30];
-    player player;
-    scanf("%s",name);
-    player.name = name;
-    player.score = 0;
-    return player;
-}

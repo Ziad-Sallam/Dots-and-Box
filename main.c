@@ -50,9 +50,7 @@ int main(){
 
     while(endgame(s,arr))
     {
-        
 
-        
         system("cls");
         
         for(int i =0;i<s;i++)
