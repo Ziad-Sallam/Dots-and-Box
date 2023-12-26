@@ -7,7 +7,6 @@
 #include "score.h"
 #include <windows.h>
 #include "computer.h"
-#include "timer.h"
 
 #define RED "\033[31m"
 #define GREEN "\033[32m"
