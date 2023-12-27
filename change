@@ -1,0 +1,21 @@
+                printf("Are you sure?\nIf yes, press Enter to proceed\nIf not, press U to undo\n");
+                char check ;
+                scanf("%c", &check);
+                
+
+                while (check!= '\n')
+                {
+                    
+                    if (check == 'U' || check == 'u') {
+                        point--;
+                        printf("Are you sure?\nIf yes, press Enter to proceed\nIf not, press R to redo\n");
+                        scanf("%c", &check);
+                        while (check!= '\n'){
+                            scanf("%c", &check);
+                            if (check == 'R' || check == 'r') {
+                                point++;
+                            }
+                        }
+                    } 
+                }
+                
