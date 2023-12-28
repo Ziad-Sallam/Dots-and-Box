@@ -85,4 +85,9 @@ void printGrid(int r, int c, char grid[r][c],int moves[],int p){
         printf("\n");
         
     }
+<<<<<<< HEAD
 }
+=======
+}
+
+>>>>>>> 4ce26ac7b7fe0610243002a7f548436b0b16a38a
