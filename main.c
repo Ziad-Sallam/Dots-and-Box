@@ -6,6 +6,7 @@
 #include "score.h"
 #include <windows.h>
 //#include "computer.h"
+//#include "load.h"
 
 
 #define RED "\033[31m"
@@ -19,20 +20,21 @@
 int main(){
 
     settings main_menu;
-
-    main_menu = mainmenu();
-
-    int r, c,s,l,turn = 1,ch;
-    main_menu.player1.score = 0;
-    main_menu.player2.score = 0;
+    int moves[60];//an array represents the moves in order in the syntax of r*100+c*10+p if p = 1 means player on and player 2 means player 2
     int point = 0;
-   
+    main_menu = mainmenu(&point,moves);
+    
+    
     
 
-    if(main_menu.diff ==1) {r=5; c=5;s=2;l=12;}
-    else if(main_menu.diff ==2) {r=11; c=11;s=5;l=60;}
+    int r, c,s,turn = 1,ch;
+    main_menu.player1.score = 0;
+    main_menu.player2.score = 0;
+ 
+
+    if(main_menu.diff ==1) {r=5; c=5;s=2;}
+    else if(main_menu.diff ==2) {r=11; c=11;s=5;}
     int arr[s][s] = {};
-    int moves[l];//an array represents the moves in order in the syntax of r*100+c*10+p if p = 1 means player on and player 2 means player 2
     
     char grid[r][c];
 
@@ -44,6 +46,32 @@ int main(){
             
         }
     }
+
+    for(int i = 0; i<r;i++)
+    {
+        for(int j = 0;j<c;j++)
+        {
+            for(int k = 0;k<point;k++)
+            {
+                
+                if(moves[k]/1000 == i && (moves[k]/10)%100 == j)
+                {
+                    if((moves[k]/1000)%2 == 0)
+                    {
+                        grid[i][j] = '_';
+                    }
+                    else{
+                        grid[i][j] = '|';
+                    }
+                }
+            }
+        }
+
+    }
+    for(int k = 0;k<point;k++)
+    {
+        comp_line_cont(moves[k]/1000,(moves[k]/10)%100,s,arr);
+    }    
 
     char r1c, r2c, c1c, c2c;
     int r1 =0,r2=0,c1=0,c2=0;
@@ -62,7 +90,7 @@ int main(){
                 printf("\n");
             }
         
-        printGrid(r, c, grid,l,moves,point+1);
+        printGrid(r, c, grid,moves,point+1);
         printf("player %i Turn\n", turn);
         printf(CYAN"the score of player %s: %i"RESET"\t ",main_menu.player1.name,main_menu.player1.score);
         printf(MAGENTA"the score of player %s: %i"RESET"\n",main_menu.player2.name,main_menu.player2.score);
@@ -121,7 +149,7 @@ int main(){
             if (r1 == r2 && grid[r1][c1 +1] != '_'){
                 grid[r1][c1 +1] = '_';
                 printf("move made!\n");
-                moves[point] = r1*100+(c1+1)*10+1;
+                moves[point] = r1*1000+(c1+1)*10+1;
                 point+=1;
                 ch = line_contribution(r,c,grid,s,arr,r1,r2,c1,c2,&point,moves,turn);
                 main_menu.player1.score+= ch ;
@@ -138,7 +166,7 @@ int main(){
             else if (c1 == c2 && grid[r1+1][c1] != '|'){
                 grid[r1+1][c1] = '|';
                 printf("move made!\n");
-                moves[point] = (r1+1)*100+(c1)*10+1;
+                moves[point] = (r1+1)*1000+(c1)*10+1;
                 point+=1;
                 ch = line_contribution(r,c,grid,s,arr,r1,r2,c1,c2,&point,moves,turn);
                 
@@ -151,6 +179,22 @@ int main(){
                     }
                 }
                 if (ch == 0){turn = 2;};
+                                
+                
+            }
+            char s;
+            system("cls");
+            printlogo();
+            printGrid(r, c, grid,moves,point+1);
+            printf("Would you like to save the game ?");
+            fflush(stdin);
+            scanf("%c",&s);
+            if (s=='s' || s=='S')
+            {
+                FILE *file;
+                file = fopen("save.txt","w");
+                save(main_menu,moves,point,file);
+                printf("Saved\n");
                 
             }
             else{
@@ -163,7 +207,7 @@ int main(){
             if (r1 == r2 && grid[r1][c1 +1] != '_'){
                 grid[r1][c1 +1] = '_';
                 printf("move made!\n");
-                moves[point] = r1*100+(c1+1)*10+2;
+                moves[point] = r1*1000+(c1+1)*10+2;
                 point+=1;
                 ch = line_contribution(r,c,grid,s,arr,r1,r2,c1,c2,&point,moves,turn);
                 
@@ -181,7 +225,7 @@ int main(){
             else if (c1 == c2 && grid[r1+1][c1] != '|'){
                 grid[r1+1][c1] = '|';
                 printf("move made!\n");
-                moves[point] = (r1+1)*100+(c1)*10+2;
+                moves[point] = (r1+1)*1000+(c1)*10+2;
                 point+=1;
                 ch = line_contribution(r,c,grid,s,arr,r1,r2,c1,c2,&point,moves,turn);
                 
@@ -196,17 +240,31 @@ int main(){
                 if (ch == 0){turn = 1;};
                 
             }
+            
+            char s;
+            system("cls");
+            printlogo();
+            printGrid(r, c, grid,moves,point+1);
+            printf("Would you like to save the game ?");
+            fflush(stdin);
+            scanf("%c",&s);
+            if (s=='s' || s=='S')
+            {
+                FILE *file;
+                file = fopen("save.txt","w");
+                save(main_menu,moves,point,file);
+                printf("Saved\n");
+                
+            }
             else{
                 printf("Move has already been made!\n");
             }
-            
-                
-            
+ 
         }
         while(turn==2 && main_menu.mode==1)
         {
             int a= comp_move(r,c,grid,s,arr)*10+2;
-            int ch = comp_line_cont(a/100,(a/10)%10,s,arr);
+            int ch = comp_line_cont(a/1000,(a/10)%100,s,arr);
             main_menu.player2.score+=ch;            
             moves[point] = a; 
             point+=1;
@@ -215,7 +273,7 @@ int main(){
                 {
                     for(int j = 0;j<s;j++)
                     {
-                        if (arr[i][j] == 4&& grid[2*i+1][2*j+1] == ' '){grid[2*i+1][2*j+1]= turn+48;}
+                        if (arr[i][j] == 4 && grid[2*i+1][2*j+1] == ' '){grid[2*i+1][2*j+1]= turn+48;}
                     }
                 }
                 if (ch == 0){turn = 1;};      
@@ -234,7 +292,7 @@ int main(){
                 }
                 printf("\n");
             }
-    printGrid(r, c, grid,l,moves,point+1);
+    printGrid(r, c, grid,moves,point+1);
 
     for(int i = 0;i<point;i++){printf("%i ",moves[i]);}printf("\n");
 

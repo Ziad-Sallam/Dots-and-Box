@@ -11,19 +11,19 @@ int comp_move(int r,int c,char grid[r][c],int s,int matrix[s][s])//makes the com
             {
                 if(grid[2*i+1][2*j+2] != '|'){  //check right
                     grid[2*i+1][2*j+2] = '|';
-                    return (2*i+1)*10+2*j+2;
+                    return (2*i+1)*100+2*j+2;
                 }  
                 else if(grid[2*i+1][2*j] != '|'){  // check left
                     grid[2*i+1][2*j] = '|';
-                    return (2*i+1)*10+2*j;
+                    return (2*i+1)*100+2*j;
                 }    
                 else if(grid[2*i][2*j+1] != '_'){  //check up
                     grid[2*i][2*j+1] = '_';
-                    return (2*i)*10+2*j+1;
+                    return (2*i)*100+2*j+1;
                 }    
                 else if(grid[2*i+2][2*j+1] != '_'){  //check down
                     grid[2*i+2][2*j+1] = '_';
-                    return (2*i+2)*10+2*j+1;
+                    return (2*i+2)*100+2*j+1;
                 }  
 
                 
@@ -40,19 +40,19 @@ int comp_move(int r,int c,char grid[r][c],int s,int matrix[s][s])//makes the com
                 {
                     if(grid[2*i+1][2*j+2] != '|'){  //check right
                     grid[2*i+1][2*j+2] = '|';
-                    return (2*i+1)*10+2*j+2;
+                    return (2*i+1)*100+2*j+2;
                     }  
                     else if(grid[2*i+1][2*j] != '|'){  // check left
                         grid[2*i+1][2*j] = '|';
-                        return (2*i+1)*10+2*j;
+                        return (2*i+1)*100+2*j;
                     }    
                     else if(grid[2*i][2*j+1] != '_'){  //check up
                         grid[2*i][2*j+1] = '_';
-                        return (2*i)*10+2*j+1;
+                        return (2*i)*100+2*j+1;
                     }    
                     else if(grid[2*i+2][2*j+1] != '_'){  //check down
                         grid[2*i+2][2*j+1] = '_';
-                        return (2*i+2)*10+2*j+1;
+                        return (2*i+2)*100+2*j+1;
                     }  
                 }
             }

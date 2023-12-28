@@ -26,7 +26,7 @@ int validate(int r1,int r2,int c1,int c2){
 
 //function to get index of the line
 //function call if valid=1
-void printGrid(int r, int c, char grid[r][c],int l,int moves[l],int p){
+void printGrid(int r, int c, char grid[r][c],int moves[],int p){
     
     int turn = 0;
     
@@ -42,8 +42,8 @@ void printGrid(int r, int c, char grid[r][c],int l,int moves[l],int p){
                     {
                         for(int l = 0;l<p;l++)
                         {
-                            if (moves[l]%10 == 1 && ((moves[l])/10)%10 == j && (moves[l]/100) ==i){turn = 1;break;}
-                            else if(moves[l]%10 == 2&& ((moves[l])/10)%10 == j && (moves[l]/100) ==i){turn = 2;break;}
+                            if (moves[l]%10 == 1 && ((moves[l])/10)%100 == j && (moves[l]/1000) ==i){turn = 1;break;}
+                            else if(moves[l]%10 == 2&& ((moves[l])/10)%100 == j && (moves[l]/1000) ==i){turn = 2;break;}
                         }
                         
                         if(turn==1){printf(CYAN"%c"RESET,grid[i][j]);}
@@ -58,14 +58,14 @@ void printGrid(int r, int c, char grid[r][c],int l,int moves[l],int p){
             if (i%2 == 1)
             {
                 
-                for(int nr = 0; nr<4;nr++){
+                for(int nr = 0; nr<5;nr++){
                     
                     for(int x = 0; x < c;x++)
                     {
                         for(int l = 0;l<p;l++)
                     {
-                        if (moves[l] %10 == 1 && ((moves[l])/10)%10 == x && (moves[l]/100) ==i){turn =1;break;}
-                        else if(moves[l]%10 == 2 && ((moves[l])/10)%10 == x && (moves[l]/100) ==i){turn = 2;break;}
+                        if (moves[l] %10 == 1 && ((moves[l])/10)%100 == x && (moves[l]/1000) ==i){turn =1;break;}
+                        else if(moves[l]%10 == 2 && ((moves[l])/10)%100 == x && (moves[l]/1000) ==i){turn = 2;break;}
                     }
                         if(turn==1){printf(CYAN"%c"RESET,grid[i][x]);}
                         else if(turn==2){printf(MAGENTA"%C"RESET,grid[i][x]);}
@@ -74,7 +74,7 @@ void printGrid(int r, int c, char grid[r][c],int l,int moves[l],int p){
                         printf("    ");
                         turn = 0;
                     }
-                    if(nr < 3)
+                    if(nr < 4)
                     {
                     printf("\n");
                     }
@@ -86,44 +86,3 @@ void printGrid(int r, int c, char grid[r][c],int l,int moves[l],int p){
         
     }
 }
-
-//check if a player completed a box function)
-/*int checkBox(int i,int r1,int r2,int c1,int c2,int n,int m,char a[][],int round){
-        if (c1==c2){
-            if(r1<r2){
-                if(i==1){a[r1+1][c1]='1';}
-                else{a[r1+1][c1]='2';}
-            }
-            else{
-                if(i==1){a[r2+1][c1]='1';}
-                else{a[r2+1][c1]='2';}
-            }
-            }
-        else {
-            if(c1<c2){
-                if(i==1){a[r1][c1+1]='a';}
-                else {a[r1][c1+1]='b';}
-            }
-            else {
-                if(i==1){a[r1][c2+1]='a';}
-                else {a[r1][c2+1]='b';}
-            }
-        }
-
-    int flag = 0;
-    for (int m=1;m<n;m+=2){
-        for (int j=1;j<n;j+=2){
-            if(((a[m][j-1] =='1')(a[m][j-1]=='2'))&&((a[m][j+1]=='1')(a[m][j+1]=='2'))&&((a[m-1][j]=='a')(a[m-1][j]=='b'))&&((a[m+1][j]=='a')(a[m+1][j]=='b'))&&(a[m][j]=='S')){
-                    if(round==1){
-                        a[m][j]='A';
-                        flag++;
-                    }
-                    else if(round==2){
-                        a[m][j]='B';
-                        flag++;
-
-                    }
-            }
-        }
-    }
-   return flag; }*/

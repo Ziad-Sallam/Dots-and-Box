@@ -5,6 +5,7 @@
 
 player get_player_data();
 settings newGameMenu();
+settings load(FILE *f,int *p,int moves[]);
 
 void printlogo()
 {
@@ -16,11 +17,11 @@ printf("| |_) |( (_) )| |_ \\__, \\   | (_> ,<`   | (_) )( (_) ) >  < (  ___/\\_
 printf("(____/'`\\___/'`\\__)(____/   `\\___/\\/'   (____/'`\\___/'(_/\\_)`\\____)(____/\n"); 
                                                                          
 printf("                                                               by ziad & logy\n\n");
+printf("to exit press CTRL + c\n\n");
                                                             
-
 }
 
-settings mainmenu()  //this function retuns a pointer to the game settings
+settings mainmenu(int *p,int moves[])  //this function retuns a pointer to the game settings
 {
     settings settings;
     
@@ -53,6 +54,11 @@ settings mainmenu()  //this function retuns a pointer to the game settings
     }
     else if (command == 2)
     {
+        FILE *f;
+        f = fopen("save.txt","r");
+
+        settings = load(f,p,moves);
+        return settings;
         //add a function to open a saved game
     }
     else if (command == 3)
@@ -78,6 +84,9 @@ settings mainmenu()  //this function retuns a pointer to the game settings
             line++;
 
         }      
+    }
+    else if (command == 4){
+        exit(0);
     }
     return settings;
 }
@@ -139,6 +148,50 @@ settings newGameMenu()
         printf("Error !! Enter the right command\n");
     }
     return settings; 
+
+}
+
+void save(settings set,int moves[],int p,FILE *file)
+{
+    file = fopen("save.txt","w");
+    fprintf(file,"%s\n%s\n %i\n %i\n%i\n%i\n%i\n",
+                                    set.player1.name,
+                                    set.player2.name,
+                                    set.player1.score,
+                                    set.player2.score,
+                                    set.mode,
+                                    set.diff,
+                                    p);
+
+
+    for (int i = 0;i<p;i++)
+    {
+        fprintf(file,"%i ",moves[i]);
+    }
+    fclose(file);
+}
+
+settings load(FILE *f,int *p,int moves[])
+{
+    settings set;
+    set.player1.name = malloc(30);
+    set.player2.name = malloc(30);
+
+    f = fopen("save.txt","r");
+
+    fscanf(f,"%30s",set.player1.name);
+    fscanf(f,"%30s",set.player2.name);
+    fscanf(f,"%i",&set.player1.score);
+    fscanf(f,"%i",&set.player2.score);
+    fscanf(f,"%i",&set.mode);
+    fscanf(f,"%i",&set.diff);
+    fscanf(f,"%i",p);
+    for (int i = 0;i<*p;i++)
+    {
+        fscanf(f,"%i",&moves[i]); 
+    }
+    fclose(f);
+    return set;                                
 
 }
 
