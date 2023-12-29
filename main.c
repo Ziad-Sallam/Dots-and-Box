@@ -182,24 +182,7 @@ int main(){
                                 
                 
             }
-            char s;
-            system("cls");
-            printlogo();
-            printGrid(r, c, grid,moves,point+1);
-            printf("Would you like to save the game ?");
-            fflush(stdin);
-            scanf("%c",&s);
-            if (s=='s' || s=='S')
-            {
-                FILE *file;
-                file = fopen("save.txt","w");
-                save(main_menu,moves,point,file);
-                printf("Saved\n");
-                
-            }
-            else{
-                printf("Move has already been made!\n");
-            }
+            
                           
             
         }
@@ -241,14 +224,15 @@ int main(){
                 
             }
             
-            char s;
+            char z;
+            char stop = '1';
             system("cls");
             printlogo();
             printGrid(r, c, grid,moves,point+1);
-            printf("Would you like to save the game ?");
+            printf("Enter S to save the game/ Entre Uto undo this move: ");
             fflush(stdin);
-            scanf("%c",&s);
-            if (s=='s' || s=='S')
+            scanf("%c",&z);
+            if (z=='s' || z=='S')
             {
                 FILE *file;
                 file = fopen("save.txt","w");
@@ -256,9 +240,36 @@ int main(){
                 printf("Saved\n");
                 
             }
-            else{
-                printf("Move has already been made!\n");
+            else if (z== 'u'|| z=='U')
+            {
+                int ru,cu;
+                ru = moves[point-1]/1000;
+                cu = (moves[point-1]/10)%100;
+                grid[ru][cu] = ' ';
+                anti_move(ru,cu,s,arr);
+                point--;
+                while (stop != '\n')
+                {
+                    printGrid(r, c, grid,moves,point+1);
+                    printf("r to redo the last move\n");
+                    fflush(stdin);
+                    scanf("%c",&stop);
+                    if (stop == 'r'|| stop == 'R')
+                    {
+                        point++;
+                        ru = moves[point-1]/1000;
+                        cu = (moves[point-1]/10)%100;
+                        if (ru%2==0)
+                        {
+                            grid[ru][cu] = '_';
+                        }
+                        else{grid[ru][cu] = '|';}
+                        comp_line_cont(ru,cu,s,arr);
+
+                    }
+                }
             }
+            
  
         }
         while(turn==2 && main_menu.mode==1)
