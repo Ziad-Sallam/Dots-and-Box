@@ -415,7 +415,7 @@ int main(){
                 }
                 printf("\n");
             }
-    printGrid(r, c, grid,moves,point+1);
+    printGrid(r, c, grid,moves,point+2);
 
     for(int i = 0;i<point;i++){printf("%i ",moves[i]);}printf("\n");
 
