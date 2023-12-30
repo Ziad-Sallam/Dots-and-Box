@@ -228,10 +228,11 @@ int main(){
                 grid[ru][cu] = ' ';
                 main_menu.player1.score+=anti_move(ru,cu,s,arr,r,c,grid);
                 point--;
-                turn = 2;
+                turn = 1;
                 while (stop != '\n')
                 {
                     system("cls");
+                    printlogo();
                     printGrid(r, c, grid,moves,point+1);
                     printf("player %i Turn\n", turn);
                     printf(CYAN"the score of player %s: %i"RESET"\t ",main_menu.player1.name,main_menu.player1.score);
