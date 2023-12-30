@@ -253,12 +253,15 @@ int main(){
                                     grid[ru][cu] = '_';
                                 }
                                 else{grid[ru][cu] = '|';}
-                                main_menu.player1.score+=comp_line_cont(ru,cu,s,arr);
+                                ch=comp_line_cont(ru,cu,s,arr);
+                                main_menu.player1.score+=ch;
+                                if(ch == 0){turn = 2;}
 
                             }
 
                     }
                 }
+                
             }
             
                           
@@ -367,12 +370,16 @@ int main(){
                                     grid[ru][cu] = '_';
                                 }
                                 else{grid[ru][cu] = '|';}
-                                main_menu.player2.score+=comp_line_cont(ru,cu,s,arr);
+                                ch =comp_line_cont(ru,cu,s,arr);
+                                main_menu.player2.score+=ch;
+                                if(ch == 0){turn = 1;}
+                                
 
                             }
 
                     }
                 }
+                
             }
             
  
