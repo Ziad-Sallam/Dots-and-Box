@@ -91,19 +91,19 @@ int comp_line_cont(int r,int c,int s,int matrix[s][s])
     return cont;
 }
 
-int anti_move(int r,int c,int s,int matrix[s][s])
+int anti_move(int r,int c,int s,int matrix[s][s],int x,int y, char grid[x][y])
 {
     int cont = 0;
     printf("undoing\n");
     if(r%2==0)
     {
         if((r/2)-1>=0){
-            if(matrix[(r/2)-1][(c-1)/2] ==4 ){cont-=1;}
+            if(matrix[(r/2)-1][(c-1)/2] ==4 ){cont-=1;grid[2*((r/2)-1)+1][2*((c-1)/2)+1]= 48;}
             matrix[(r/2)-1][(c-1)/2] -=1;
             
         }
         if(r/2<s){
-            if(matrix[(r/2)][(c-1)/2] ==4 ){cont-=1;}
+            if(matrix[(r/2)][(c-1)/2] ==4 ){cont-=1;grid[2*(r/2)+1][2*((c-1)/2)+1]= 48;}
             matrix[(r/2)][(c-1)/2] -=1;
             
         }
@@ -111,11 +111,12 @@ int anti_move(int r,int c,int s,int matrix[s][s])
     else if(r%2==1)
     {
         if((c/2)-1>=0){
+        if(matrix[(r-1)/2][(c/2)-1] ==4 ){cont-=1;grid[2*((r-1)/2)+1][2*((c/2)-1)+1]= 48;}
         matrix[(r-1)/2][(c/2)-1]-=1;
-        if(matrix[(r-1)/2][(c/2)-1] ==4 ){cont-=1;}
+        
         }
         if(c/2<s){
-            if(matrix[(r-1)/2][(c/2)] ==4 ){cont-=1;}
+            if(matrix[(r-1)/2][(c/2)] ==4 ){cont-=1;grid[2*((r-1)/2)+1][2*(c/2)+1]= 48;}
             matrix[(r-1)/2][(c/2)]-=1;
             
         }
@@ -123,3 +124,4 @@ int anti_move(int r,int c,int s,int matrix[s][s])
     }
     return cont;
 }
+
