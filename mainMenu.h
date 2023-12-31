@@ -3,18 +3,27 @@
 #include <stdlib.h>
 #include <string.h>
 
+
+#define RED "\033[31m"
+#define GREEN "\033[32m"
+#define YELLOW "\033[33m"
+#define BLUE "\033[34m"
+#define MAGENTA "\033[35m"
+#define CYAN "\033[36m"
+#define RESET "\033[0m"
+
 player get_player_data();
 settings newGameMenu();
 settings load(FILE *f,int *p,int moves[]);
 
 void printlogo()
 {
-printf(" ___           _             _____       ___   \n");                          
-printf("(  _`\\        ( )_          (  _  )     (  _`\\   \n");                         
-printf("| | ) |   _   | ,_)  ___    `\\  ,/'     | (_) )   _            __    ___ \n"); 
-printf("| | | ) /'_`\\ | |  /',__)    /'_`\\/\\    |  _ <' /'_`\\ (`\\/') /'__`\\/',__)\n"); 
-printf("| |_) |( (_) )| |_ \\__, \\   | (_> ,<`   | (_) )( (_) ) >  < (  ___/\\__, \\\n"); 
-printf("(____/'`\\___/'`\\__)(____/   `\\___/\\/'   (____/'`\\___/'(_/\\_)`\\____)(____/\n"); 
+printf(YELLOW" ___           _             _____       ___   \n"RESET);                          
+printf(YELLOW"(  _`\\        ( )_          (  _  )     (  _`\\   \n"RESET);                         
+printf(YELLOW"| | ) |   _   | ,_)  ___    `\\  ,/'     | (_) )   _            __    ___ \n"RESET); 
+printf(YELLOW"| | | ) /'_`\\ | |  /',__)    /'_`\\/\\    |  _ <' /'_`\\ (`\\/') /'__`\\/',__)\n"RESET); 
+printf(YELLOW"| |_) |( (_) )| |_ \\__, \\   | (_> ,<`   | (_) )( (_) ) >  < (  ___/\\__, \\\n"RESET); 
+printf(YELLOW"(____/'`\\___/'`\\__)(____/   `\\___/\\/'   (____/'`\\___/'(_/\\_)`\\____)(____/\n"RESET); 
                                                                          
 printf("                                                               by ziad & logy\n\n");
 printf("to exit press CTRL + c\n\n");
@@ -28,6 +37,8 @@ settings mainmenu(int *p,int moves[])  //this function retuns a pointer to the g
     system("cls");
     int check = 1;
     int command;
+    char commandc;
+
     
     printlogo();
     printf("(1) New Game: \n\n");
@@ -37,7 +48,9 @@ settings mainmenu(int *p,int moves[])  //this function retuns a pointer to the g
     printf("Choose: ");
     while (check)
     {
-        scanf("%i",&command);
+        fflush(stdin);
+        scanf("%c",&commandc);
+        command = commandc-48;
         if (command == 1 || command == 2|| command == 3 ||command == 4 )
         {
             system("cls");
@@ -95,6 +108,7 @@ settings mainmenu(int *p,int moves[])  //this function retuns a pointer to the g
 settings newGameMenu()
 {
     int check = 1,mode,diff;
+    char modec,diffc;
     
 
     settings settings;
@@ -107,7 +121,9 @@ settings newGameMenu()
     printf("Select the game mode: \n\n (1) Human Vs Computer \n\n (2) Human vs Human\n\n Choose: ");
     while (check)
     {
-        scanf("%i",&mode);
+        fflush(stdin);
+        scanf("%c",&modec);
+        mode = modec-48;
         if (mode == 1 || mode == 2)
         {
             settings.mode = mode;
@@ -139,7 +155,9 @@ settings newGameMenu()
     printf("Select the game difficulty: \n\n (1) Easy (2X2) \n\n (2) Hard (5X5)\n choose: ");
     while (check)
     {
-        scanf("%i",&diff);
+        fflush(stdin);
+        scanf("%c",&diffc);
+        diff = diffc-48;
         if (mode == 1 || mode == 2)
         {
             settings.diff = diff;
@@ -153,7 +171,7 @@ settings newGameMenu()
 
 void save(settings set,int moves[],int p,FILE *file)
 {
-    file = fopen("save.txt","w");
+    
     fprintf(file,"%s\n%s\n %i\n %i\n%i\n%i\n%i\n",
                                     set.player1.name,
                                     set.player2.name,
@@ -176,8 +194,29 @@ settings load(FILE *f,int *p,int moves[])
     settings set;
     set.player1.name = malloc(30);
     set.player2.name = malloc(30);
-
-    f = fopen("save.txt","r");
+    char c ;
+    int n;
+    printf("Choose a slot:\n  (1) Save 1\n  (2) Save 2\n  (3) Save 3\n");
+    fflush(stdin);
+    scanf("%c",&c);
+    while (c != '1' && c != '3'&&c != '2'){
+        printf("Invalid Input!\n");
+        fflush(stdin);
+        scanf("%c",&c);
+    }
+    n = c-48;
+    if(n ==1)
+    {
+        f = fopen("save1.txt","r");
+    }
+    if(n ==2)
+    {
+        f = fopen("save2.txt","r");
+    }
+    if(n ==3)
+    {
+        f = fopen("save3.txt","r");
+    }
 
     fscanf(f,"%30s",set.player1.name);
     fscanf(f,"%30s",set.player2.name);
