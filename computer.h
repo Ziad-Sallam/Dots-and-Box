@@ -1,3 +1,6 @@
+#ifndef COMPUTER_H_INCLUDED
+#define COMPUTER_H_INCLUDED
+
 #include <stdio.h>
 
 int comp_move(int r,int c,char grid[r][c],int s,int matrix[s][s])//makes the computer choose a move and returns the index of that move (rc)
@@ -125,3 +128,4 @@ int anti_move(int r,int c,int s,int matrix[s][s],int x,int y, char grid[x][y])
     return cont;
 }
 
+#endif

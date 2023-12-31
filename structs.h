@@ -1,4 +1,5 @@
-
+#ifndef STRUCT_H_INCLUDED
+#define STRUCT_H_INCLUDED
 
 typedef struct  // the data of the player (name and score)
 {
@@ -19,3 +20,5 @@ typedef struct  //a struct to represent the game settings
     player player2;
 
 }settings;
+
+#endif
