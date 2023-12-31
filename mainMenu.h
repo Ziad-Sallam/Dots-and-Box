@@ -1,3 +1,6 @@
+#ifndef MAINMENU_H_INCLUDED
+#define MAINMENU_H_INCLUDED
+
 #include <stdio.h>
 #include "structs.h"
 #include <stdlib.h>
@@ -96,7 +99,12 @@ settings mainmenu(int *p,int moves[])  //this function retuns a pointer to the g
             printf("%s",str);
             line++;
 
-        }      
+        }
+        char w;
+        printf("\npress Enter to go back");
+        fflush(stdin);
+        scanf("%c",&w);
+        mainmenu(p,moves);      
     }
     else if (command == 4){
         exit(0);
@@ -234,3 +242,4 @@ settings load(FILE *f,int *p,int moves[])
 
 }
 
+#endif
