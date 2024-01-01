@@ -150,19 +150,21 @@ int checkCont(int r, int c, char grid[r][c], int visited[r][c], int r1, int c1, 
     return 0;
 }
 
-int drawCont(int r, int c, char grid[r][c], int visited[r][c],int moves[],int p,int turn,int s,int matrix[s][s]){
+int drawCont(int r, int c, char grid[r][c], int visited[r][c],int moves[],int *p,int turn,int s,int matrix[s][s]){
     int count = 0;
     for(int i=0; i<r; i++){
         for(int j=0; j<c; j++){
             if (visited[i][j] == 1 && visited[i][j+2] == 1) {
                 grid[i][j+1] = '_';
                 count+=comp_line_cont(i,j+1,s,matrix);
-                moves[p] = i*1000+(j+1)*10+turn;
+                moves[*p] = i*1000+(j+1)*10+turn;
+                *p+=1;
             }
             if (visited[i][j] == 1 && visited[i+1][j] == 1) {
                 grid[i+1][j] = '|';
                 count+=comp_line_cont(i+1,j,s,matrix);
-                moves[p] = (i+1)*1000+j*10+turn;
+                moves[*p] = (i+1)*1000+j*10+turn;
+                *p+=1;
             }
         }
     }
