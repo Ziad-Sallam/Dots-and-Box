@@ -528,8 +528,12 @@ int main(){
     else if (main_menu.player1.score<main_menu.player2.score)
     {
         printf("Player Two Won !!");
-        strcpy(won.name,main_menu.player2.name);
-        won.score = main_menu.player2.score;        
+        if(main_menu.mode == 2)
+        {
+            strcpy(won.name,main_menu.player2.name);
+            won.score = main_menu.player2.score; 
+        }
+        else{exit(0);}       
     }
     else{printf("Draw");exit(0);}
 
