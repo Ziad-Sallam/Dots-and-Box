@@ -79,27 +79,25 @@ settings mainmenu(int *p,int moves[])  //this function retuns a pointer to the g
     }
     else if (command == 3)
     {
-        FILE *file;
-        char *str;
-        char x[1024];
+        
         printlogo();
-        file = fopen("leaderboard.csv","r");
+        
         printf("The leaderboard:\n");
-        int line = 0;
-        while((fgets(x,1024,file) != NULL)&& line <10)
-        {
-            if (line ==0)
-            {
-                line++;
-                continue;
-            }
-            str = strtok(x,",");
-            printf("%i : %s\t",line,str);
-            str = strtok(NULL,",");
-            printf("%s",str);
-            line++;
+        int l = 0;
+        char s[10][20];
+        int x[20] = {0};
+        
+        FILE *f;
+        f = fopen("leader.txt","r");
 
-        }
+    while(1)
+    {
+        fscanf(f,"%s\n",s[l]);
+        fscanf(f,"%i",&x[l]);
+        if(x[l] == 0){break;}
+        printf("%i : %s\t%i\n",l+1,s[l],x[l]);
+        l++;
+    }
         char w;
         printf("\npress Enter to go back");
         fflush(stdin);
