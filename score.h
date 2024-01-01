@@ -49,13 +49,13 @@ int line_contribution(int r,int c,char grid[r][c],int s,int arr[s][s],int r1,int
                 }
         }
     }
-    int z = 1;
-    while(x && z){
-        z = x;
-        x+=auto_complete(r,c,grid,s,arr,point,moves,turn);
-        z-=x;
+    // int z = 1;
+    // while(x && z){
+    //     z = x;
+    //     x+=auto_complete(r,c,grid,s,arr,point,moves,turn);
+    //     z-=x;
         
-    }
+    // }
     return x;
 }
 
