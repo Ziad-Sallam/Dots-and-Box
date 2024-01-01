@@ -10,6 +10,10 @@
 //#include "load.h"
 
 
+void sort(int arr[], int n,char names[][30]);
+void swap(int* xp, int* yp);
+
+
 #define RED "\033[31m"
 #define GREEN "\033[32m"
 #define YELLOW "\033[33m"
@@ -99,6 +103,14 @@ int main(){
         printf("player %i Turn\n", turn);
         printf(CYAN"the score of player %s: %i"RESET"\t ",main_menu.player1.name,main_menu.player1.score);
         printf(MAGENTA"the score of player %s: %i"RESET"\n",main_menu.player2.name,main_menu.player2.score);
+
+
+        // Stop the timer
+        time_t end;
+        time(&end); 
+        int elapsed_time;
+        elapsed_time = difftime(end, start);
+        printf("Elapsed time is %d : %.2d\n", elapsed_time/60, elapsed_time%60);
         
         
         printf("Make a move!\n");
@@ -512,13 +524,108 @@ int main(){
     printf(CYAN"the score of player %s: %i"RESET"\t ",main_menu.player1.name,main_menu.player1.score);
     printf(MAGENTA"the score of player %s: %i"RESET"\n",main_menu.player2.name,main_menu.player2.score);
 
+
+    player won;
+    won.name = malloc(30);
+
     if (main_menu.player1.score>main_menu.player2.score)
     {
         printf("Player One Won !!");
+        strcpy(won.name,main_menu.player1.name);
+        won.score = main_menu.player1.score;
     }
     else if (main_menu.player1.score<main_menu.player2.score)
     {
         printf("Player Two Won !!");
+        strcpy(won.name,main_menu.player2.name);
+        won.score = main_menu.player2.score;        
     }
-    else{printf("Draw");}
+    else{printf("Draw");exit(0);}
+
+
+
+    char names[100][30];
+    int x[100] = {0};
+    int l = 0;
+    FILE *f;
+    f = fopen("leader.txt","r");
+    int found = 0;
+    while(1)
+    {
+        fscanf(f,"%s\n",names[l]);
+        fscanf(f,"%i",&x[l]);
+        if(x[l] == 0){break;}
+        l++;
+    }
+
+    for(int i = 0; i<l;i++)
+    {
+        if(strcmp(names[i],won.name) == 0)
+        {
+            found = i;
+            x[i] += 1;
+            break;
+        }
+    }
+
+    if (found == 0)
+    {
+        strcpy(names[l],won.name);
+        x[l] = 1;
+        l++;
+    }
+
+
+    sort(x,l,names);
+    for(int i = 0;i<l;i++)
+    {
+        printf("%s  %i\n",names[i],x[i]);
+    }
+    fclose(f);
+    f = fopen("leader.txt","w");
+    for (int i = l-1;i>-1;i--)
+    {
+        fprintf(f,"%s\n%i\n",names[i],x[i]);
+    }
+
+
 }
+
+
+
+
+void swap(int* xp, int* yp)
+{
+    int temp = *xp;
+    *xp = *yp;
+    *yp = temp;
+}
+
+
+// A function to implement selection sort
+void sort(int arr[], int n,char names[][30])
+{
+    int i, j, min_idx;
+    char st[30];
+
+    // One by one move boundary of unsorted subarray
+    for (i = 0; i < n; i++)
+    {
+        // Find the minimum element in unsorted array
+        min_idx = i;
+        for (j = i+1; j < n; j++){
+          if (arr[j] < arr[min_idx])
+            min_idx = j;
+
+        // Swap the found minimum element with the first element
+        
+        swap(&arr[min_idx], &arr[i]);
+
+        strcpy(st,names[min_idx]);
+        strcpy(names[min_idx],names[i]);
+        strcpy(names[i],st);
+
+        }
+    }
+}    
+
