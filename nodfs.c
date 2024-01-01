@@ -90,14 +90,6 @@ int main(){
 
         system("cls");
         printlogo();
-        for(int i =0;i<s;i++)
-            {
-                for(int j = 0;j<s;j++)
-                {
-                    printf("%i  ",arr[i][j]);
-                }
-                printf("\n");
-            }
         
         printGrid(r, c, grid,moves,point+1);
         printf("player %i Turn\n", turn);
@@ -519,7 +511,6 @@ int main(){
             }
     printGrid(r, c, grid,moves,point+2);
 
-    for(int i = 0;i<point;i++){printf("%i ",moves[i]);}printf("\n");
 
     printf(CYAN"the score of player %s: %i"RESET"\t ",main_menu.player1.name,main_menu.player1.score);
     printf(MAGENTA"the score of player %s: %i"RESET"\n",main_menu.player2.name,main_menu.player2.score);
@@ -628,4 +619,3 @@ void sort(int arr[], int n,char names[][30])
         }
     }
 }    
-
