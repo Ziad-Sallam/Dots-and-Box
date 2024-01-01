@@ -333,7 +333,7 @@ int main(){
                         }
                     }
                     if(checkCont(r,c,grid,visited,r1,c1,r2,c2) != 0){
-                        main_menu.player2.score += drawCont(r,c,grid,visited,moves,point,turn,s,arr);
+                        main_menu.player2.score += drawCont(r,c,grid,visited,moves,&point,turn,s,arr);
                     }
                 }
 
@@ -364,7 +364,7 @@ int main(){
                         }
                     }
                     if(checkCont(r,c,grid,visited,r1,c1,r2,c2) != 0){
-                        main_menu.player2.score += drawCont(r,c,grid,visited,moves,point,turn,s,arr);
+                        main_menu.player2.score += drawCont(r,c,grid,visited,moves,&point,turn,s,arr);
                     }
                 }
 
