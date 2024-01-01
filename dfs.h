@@ -160,7 +160,7 @@ int drawCont(int r, int c, char grid[r][c], int visited[r][c],int moves[],int *p
                 moves[*p] = i*1000+(j+1)*10+turn;
                 *p+=1;
             }
-            if (visited[i][j] == 1 && visited[i+1][j] == 1) {
+            if (visited[i][j] == 1 && visited[i+2][j] == 1) {
                 grid[i+1][j] = '|';
                 count+=comp_line_cont(i+1,j,s,matrix);
                 moves[*p] = (i+1)*1000+j*10+turn;
